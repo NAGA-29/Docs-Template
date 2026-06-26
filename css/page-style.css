@@ -1,6 +1,8 @@
 body {
-  font-family: "メイリオ, Noto Sans CJK JP", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
-  font-size: 14px;
+  font-family:
+    "メイリオ, Noto Sans CJK JP", "Noto Sans JP", "Yu Gothic UI", Meiryo,
+    sans-serif;
+  font-size: 10px;
   line-height: 1.6;
   color: #24292e;
   background: #ffffff;
@@ -47,7 +49,7 @@ a:hover {
 
 pre,
 code {
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   background: #f6f8fa;
   border: 1px solid #d1d5da;
   border-radius: 3px;
@@ -114,4 +116,19 @@ hr {
 
 .page {
   page-break-after: always;
+}
+
+/* mermaid 図がページ内に収まるよう高さ・幅を制限する */
+.mermaid {
+  text-align: center;
+  page-break-inside: avoid;
+  margin: 1.5em 0;
+}
+
+.mermaid svg,
+.mermaid img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 23cm !important;
 }
