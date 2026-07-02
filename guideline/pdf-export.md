@@ -33,7 +33,7 @@
 
 ## 3. PDFへの出力手順
 
-1. PDF化したい Markdown ファイル（例: `Requirements_Definition_Document_TEMPLATE.md`）をエディタで開く。
+1. PDF化したい Markdown ファイル（例: `design/Requirements_Definition_Document_TEMPLATE.md`）をエディタで開く。
 2. コマンドパレットを開く（`Ctrl/Cmd + Shift + P`）。
 3. **`Markdown PDF: Export (pdf)`** を実行する。
    - すべての形式を出力したい場合は `Markdown PDF: Export (all)` を実行します（PDF/HTML/PNG/JPEG）。
