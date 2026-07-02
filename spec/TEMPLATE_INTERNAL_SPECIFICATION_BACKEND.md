@@ -413,7 +413,7 @@ flowchart TD
 
 ## 10. 運用手順
 
-> 詳細な運用手順・アラート対応・メンテナンスのRunbookは `TEMPLATE_OPERATION.md` を基に別途整備すること。本セクションにはバックエンド固有の補足や依存関係のみ記載してください。
+> 詳細な運用手順・アラート対応・メンテナンスのRunbookは `operation/TEMPLATE_OPERATION.md` を基に別途整備すること。本セクションにはバックエンド固有の補足や依存関係のみ記載してください。
 
 ### 10.1 日常運用
 
@@ -530,7 +530,7 @@ flowchart TD
 - [ ] アーキテクチャ図の作成完了
 - [ ] API仕様の記入完了
 - [ ] セキュリティ要件の記入完了
-- [ ] 運用セクションに `TEMPLATE_OPERATION.md` ベースのRunbook参照とバックエンド固有事項を記載
+- [ ] 運用セクションに `operation/TEMPLATE_OPERATION.md` ベースのRunbook参照とバックエンド固有事項を記載
 - [ ] 改善計画の記入完了
 - [ ] 影響のあるADRを `docs/adr/` に作成または更新済み
 - [ ] `template/architecture.md` の更新が必要か確認し反映済み
