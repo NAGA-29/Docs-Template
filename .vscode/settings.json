@@ -15,8 +15,8 @@
   },
   "markdown-pdf.breaks": true,
   "markdown-pdf.styles": [
-    "../css/cover-style.css",
-    "../css/page-style.css",
+    "css/cover-style.css",
+    "css/page-style.css",
   ],
   "markdown-pdf.stylesRelativePathFile": true,
   "markdown-pdf.includeDefaultStyles": false,
