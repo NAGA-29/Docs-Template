@@ -12,10 +12,11 @@ VS Code の拡張機能でこれらのMarkdownを統一体裁のPDFへ出力で�
 
 | ファイル | 用途 |
 |----------|------|
-| [`design/Requirements_Definition_Document_TEMPLATE.md`](design/Requirements_Definition_Document_TEMPLATE.md) | 要件定義書テンプレート |
-| [`design/Basic_Design_Document_TEMPLATE.md`](design/Basic_Design_Document_TEMPLATE.md) | 基本設計書テンプレート |
-| [`design/Detailed_Design_Document_TEMPLATE.md`](design/Detailed_Design_Document_TEMPLATE.md) | 詳細設計書テンプレート |
-| [`design/design_documents_guide.md`](design/design_documents_guide.md) | 要件定義・基本設計・詳細設計・仕様書の使い分けガイド |
+| [`design/basic/Requirements_Definition_Document_TEMPLATE.md`](design/basic/Requirements_Definition_Document_TEMPLATE.md) | 要件定義書テンプレート |
+| [`design/basic/Basic_Design_Document_TEMPLATE.md`](design/basic/Basic_Design_Document_TEMPLATE.md) | 基本設計書テンプレート |
+| [`design/basic/Detailed_Design_Document_TEMPLATE.md`](design/basic/Detailed_Design_Document_TEMPLATE.md) | 詳細設計書テンプレート |
+| [`design/basic/design_documents_guide.md`](design/basic/design_documents_guide.md) | 要件定義・基本設計・詳細設計・仕様書の使い分けガイド |
+| [`design/basic/requirements_checklist.md`](design/basic/requirements_checklist.md) | 要件確認チェックリスト（共通機能・非機能要件・見積もるべき要件・ヒアリング観点） |
 
 ### 内部仕様書
 
@@ -46,10 +47,12 @@ VS Code の拡張機能でこれらのMarkdownを統一体裁のPDFへ出力で�
 ├── README.md                                     # 本ファイル（インデックス）
 ├── TEMPLATE_ROOT_README.md                       # プロジェクトルート用README（分類が曖昧なためルート直下）
 ├── design/                                       # 要件定義・設計書テンプレート
-│   ├── Requirements_Definition_Document_TEMPLATE.md
-│   ├── Basic_Design_Document_TEMPLATE.md
-│   ├── Detailed_Design_Document_TEMPLATE.md
-│   └── design_documents_guide.md                 # 各設計文書の使い分けガイド
+│   └── basic/
+│       ├── Requirements_Definition_Document_TEMPLATE.md
+│       ├── Basic_Design_Document_TEMPLATE.md
+│       ├── Detailed_Design_Document_TEMPLATE.md
+│       ├── design_documents_guide.md             # 各設計文書の使い分けガイド
+│       └── requirements_checklist.md             # 要件確認チェックリスト（非機能・見積観点）
 ├── spec/                                         # 内部仕様書テンプレート・各種仕様の格納先
 │   ├── TEMPLATE_INTERNAL_SPECIFICATION_BACKEND.md
 │   ├── TEMPLATE_INTERNAL_SPECIFICATION_FRONTEND.md
