@@ -1,0 +1,93 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+  - title: '💪 Enhancement'
+    labels:
+      - 'enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+  - title: '🎨 Style'
+    labels:
+      - 'style'
+  - title: '🔧 Refactoring'
+    labels:
+      - 'refactor'
+  - title: '🧪 Tests'
+    labels:
+      - 'test'
+  - title: '⚡ Performance'
+    labels:
+      - 'performance'
+  - title: '📖 Documentation'
+    labels:
+      - 'documentation'
+  - title: '⛓️ Dependency update'
+    labels:
+      - 'dependencies'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'chore'
+  - title: '🗑️ Removed'
+    labels:
+      - 'removed'
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+
+# メンションやコードブロックを無効化したい場合は # @ ` を追加
+change-title-escapes: '\<*_&'
+
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+
+template: |
+  ## Changes
+
+  $CHANGES
+
+# ブランチ名・変更ファイルから PR に自動でラベルを付与する
+autolabeler:
+  - label: feature
+    branch:
+      - '/^feat(ure)?[/-].+/'
+  - label: bug
+    branch:
+      - '/^(fix|bugfix)[/-].+/'
+  - label: enhancement
+    branch:
+      - '/^(enhancement|improve)[/-].+/'
+  - label: refactor
+    branch:
+      - '/^refactor(ing)?[/-].+/'
+  - label: documentation
+    branch:
+      - '/^docs?(umentation)?[/-].+/'
+    files:
+      - '*.md'
+  - label: chore
+    branch:
+      - '/^chore[/-].+/'
+  - label: test
+    branch:
+      - '/^test[/-].+/'
+  - label: github
+    files:
+      - '.github/**/*'
+  # プロジェクト固有のラベルはここに追加する
+  # - label: docker
+  #   files:
+  #     - 'docker/**/*'
+  #     - 'Dockerfile'
