@@ -22,6 +22,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | 顧客・関係者と要望を整理する | [要求定義書](templates/01_requirements/requirement_analysis.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
 | 要件を確定させる・見積もる | [要件定義書](templates/01_requirements/requirements_definition.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
 | 規模・性能・コストを概算する | [見積もり用 概算値チートシート](cheatsheets/capacity_estimation.md) |
+| 実装に着手する（技術・環境・運用方針の確認） | [開発開始チェックリスト](guidelines/development/development_start_checklist.md) |
 | 設計する | [基本設計書](templates/02_design/basic_design.md) → [詳細設計書](templates/02_design/detailed_design.md) |
 | 実装済み機能の仕様を残す | [内部仕様書（Backend / Frontend / Android）](templates/03_spec/) |
 | 技術選定・アーキテクチャを決める | [ADR](templates/04_architecture/adr.md)（[書き方](guidelines/documentation/adr_guideline.md)）→ [アーキテクチャ文書](templates/04_architecture/architecture.md) に反映 |
@@ -65,6 +66,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | ドキュメント運用 | [`document_types_guide.md`](guidelines/documentation/document_types_guide.md) | 要件定義・設計・仕様書・差分資料・ADR の役割と更新ルール |
 | | [`adr_guideline.md`](guidelines/documentation/adr_guideline.md) | ADR の位置付けと運用 |
 | | [`pdf_export.md`](guidelines/documentation/pdf_export.md) | VS Code 拡張機能による PDF 化手順 |
+| 開発 | [`development_start_checklist.md`](guidelines/development/development_start_checklist.md) | 開発開始チェックリスト（スコープ・技術選定・設計・環境・CI/CD・リスク） |
 | 要件 | [`requirements_checklist.md`](guidelines/requirements/requirements_checklist.md) | 要件確認チェックリスト（共通機能・非機能・見積対象・ヒアリング観点） |
 | 可観測性 | [`logging_convention.md`](guidelines/observability/logging_convention.md) | ログ設計ガイドライン（OpenTelemetry / ECS） |
 | | [`monitoring_tools.md`](guidelines/observability/monitoring_tools.md) | 監視基盤ツールリスト（OpenTelemetry + Grafana） |
@@ -99,6 +101,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 │   └── github/                # .github/ と同じ構成
 ├── guidelines/                # 読んで従うガイドライン（テーマ別）
 │   ├── documentation/
+│   ├── development/
 │   ├── requirements/
 │   ├── observability/
 │   └── security/

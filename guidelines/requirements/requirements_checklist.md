@@ -5,7 +5,7 @@
 | 文書名     | 要件確認チェックリスト                       |
 | バージョン | v1.0                                         |
 | 位置づけ   | 要件定義・見積時の「聞き漏れ防止」ガイド     |
-| 関連文書   | [要件定義書テンプレート](../../templates/01_requirements/requirements_definition.md) / [要求定義書テンプレート](../../templates/01_requirements/requirement_analysis.md) / [設計文書の使い分けガイド](../documentation/document_types_guide.md) |
+| 関連文書   | [開発開始チェックリスト](../development/development_start_checklist.md) / [要件定義書テンプレート](../../templates/01_requirements/requirements_definition.md) / [要求定義書テンプレート](../../templates/01_requirements/requirement_analysis.md) / [設計文書の使い分けガイド](../documentation/document_types_guide.md) |
 
 > クライアント案件（受託）か自社開発かを問わず、要件定義・設計の初期に**確認すべき項目**と、**見積に必ず含めるべき項目**を整理したチェックリストである。  
 > すべてを確定させる必要はない。重要なのは「**確認した結果、決まった / 決まっていない / 対象外**」を明示的に残すこと。
