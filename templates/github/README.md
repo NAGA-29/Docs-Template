@@ -28,7 +28,7 @@ github/
 使いたいリポジトリのルートで実行する。
 
 ```bash
-cp -r /path/to/Docs-Template/github/. .github/
+cp -r /path/to/Docs-Template/templates/github/. .github/
 rm .github/README.md .github/labels.sh   # 不要なら削除
 ```
 
@@ -42,8 +42,8 @@ Issue テンプレートの `labels:` は、ラベルが存在しないと付与
 
 ```bash
 gh auth login                         # 未ログインの場合
-./github/labels.sh OWNER/REPO         # リポジトリを指定
-./github/labels.sh                    # カレントのリポジトリ
+./templates/github/labels.sh OWNER/REPO         # リポジトリを指定
+./templates/github/labels.sh                    # カレントのリポジトリ
 ```
 
 何度実行しても安全。既存ラベルの色と説明は上書きされる。

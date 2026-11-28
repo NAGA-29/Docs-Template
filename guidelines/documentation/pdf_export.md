@@ -2,9 +2,9 @@
 
 本リポジトリのドキュメント（Markdown）は、VS Code の拡張機能 **Markdown PDF** を使ってPDF出力できるように設定済みです。表紙・ページスタイル・ヘッダー/フッター・Mermaid図の描画までまとめて設定されているため、拡張機能を入れて実行するだけで統一された体裁のPDFが得られます。
 
-- 出力設定は [`.vscode/settings.json`](../.vscode/settings.json) に定義されています。
-- 推奨拡張機能は [`.vscode/extensions.json`](../.vscode/extensions.json) に定義されています。
-- PDF用スタイルは [`css/cover-style.css`](../css/cover-style.css) / [`css/page-style.css`](../css/page-style.css) に定義されています。
+- 出力設定は [`.vscode/settings.json`](../../.vscode/settings.json) に定義されています。
+- 推奨拡張機能は [`.vscode/extensions.json`](../../.vscode/extensions.json) に定義されています。
+- PDF用スタイルは [`css/cover-style.css`](../../css/cover-style.css) / [`css/page-style.css`](../../css/page-style.css) に定義されています。
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## 2. 推奨拡張機能のインストール
 
-本リポジトリを VS Code で開くと、右下に「推奨拡張機能をインストールしますか？」という通知が表示されます。これを承認すると以下がまとめて導入されます（[`.vscode/extensions.json`](../.vscode/extensions.json)）。
+本リポジトリを VS Code で開くと、右下に「推奨拡張機能をインストールしますか？」という通知が表示されます。これを承認すると以下がまとめて導入されます（[`.vscode/extensions.json`](../../.vscode/extensions.json)）。
 
 | 拡張機能ID | 名称 | 役割 |
 |------------|------|------|
@@ -33,12 +33,12 @@
 
 ## 3. PDFへの出力手順
 
-1. PDF化したい Markdown ファイル（例: `design/Requirements_Definition_Document_TEMPLATE.md`）をエディタで開く。
+1. PDF化したい Markdown ファイル（例: `templates/01_requirements/requirements_definition.md`）をエディタで開く。
 2. コマンドパレットを開く（`Ctrl/Cmd + Shift + P`）。
 3. **`Markdown PDF: Export (pdf)`** を実行する。
    - すべての形式を出力したい場合は `Markdown PDF: Export (all)` を実行します（PDF/HTML/PNG/JPEG）。
    - エディタ内で右クリック →「Markdown PDF: Export (pdf)」からでも実行できます。
-4. 変換が完了すると、[`output/`](../output/) ディレクトリに `（ファイル名）.pdf` が生成されます。
+4. 変換が完了すると、[`output/`](../../output/) ディレクトリに `（ファイル名）.pdf` が生成されます。
 
 > 初回実行時は Markdown PDF が内部で Chromium をダウンロードするため、数分かかることがあります。
 
@@ -51,8 +51,8 @@
 | 設定キー | 値 | 意味 |
 |----------|----|------|
 | `markdown-pdf.outputDirectory` | `output` | PDFの出力先を `output/` に固定 |
-| `markdown-pdf.styles` | `../css/cover-style.css`, `../css/page-style.css` | 表紙・本文スタイルを適用 |
-| `markdown-pdf.stylesRelativePathFile` | `true` | スタイルパスを対象ファイルからの相対で解決 |
+| `markdown-pdf.styles` | `css/cover-style.css`, `css/page-style.css` | 表紙・本文スタイルを適用 |
+| `markdown-pdf.stylesRelativePathFile` | `false` | スタイルパスをワークスペースルートからの相対で解決（どの階層の文書でも同じCSSが効く） |
 | `markdown-pdf.includeDefaultStyles` | `false` | 既定スタイルを無効化し、上記CSSのみ適用 |
 | `markdown-pdf.breaks` | `true` | 改行（単一の改行）をそのまま反映 |
 | `markdown-pdf.margin.top` / `.bottom` | `0cm` / `2cm` | 上下余白（フッター用に下余白を確保） |
@@ -76,7 +76,7 @@
 
 ## 6. 画像の取り扱い
 
-`.vscode/settings.json` の `markdown.copyFiles.destination` により、エディタへ画像を貼り付け（ペースト）すると、画像は自動的に [`images/`](../images/) 配下（`images/（ドキュメント名）/`）へ保存されます。PDF出力にもこの画像が取り込まれます。
+`.vscode/settings.json` の `markdown.copyFiles.destination` により、エディタへ画像を貼り付け（ペースト）すると、画像は自動的に [`images/`](../../images/) 配下（`images/（ドキュメント名）/`）へ保存されます（文書の階層に関係なく、リポジトリ直下の `images/` に集約されます）。PDF出力にもこの画像が取り込まれます。
 
 ---
 
