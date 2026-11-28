@@ -11,14 +11,14 @@
     "source.fixAll.markdownlint": "explicit"
   },
   "markdown.copyFiles.destination": {
-    "*": "../images/${documentBaseName}/${documentBaseName}.${fileExtName}"
+    "*": "${documentWorkspaceFolder}/images/${documentBaseName}/${documentBaseName}.${fileExtName}"
   },
   "markdown-pdf.breaks": true,
   "markdown-pdf.styles": [
     "css/cover-style.css",
     "css/page-style.css",
   ],
-  "markdown-pdf.stylesRelativePathFile": true,
+  "markdown-pdf.stylesRelativePathFile": false,
   "markdown-pdf.includeDefaultStyles": false,
   "markdown-pdf.outputDirectory": "output",
   "markdown-pdf.margin.top": "0cm",

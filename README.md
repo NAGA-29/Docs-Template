@@ -1,42 +1,86 @@
-# Docs Template Index
+# Docs Template
 
-このリポジトリには、要件定義から設計・仕様・運用・組織まで、開発プロジェクトで用いる各種ドキュメントのテンプレートが格納されています。テンプレートを使用する際は、必ずプロジェクト実態に合わせてカスタマイズしてください。
+開発プロジェクトで使うドキュメントの **テンプレート** と **ガイドライン** をまとめたリポジトリです。
 
-VS Code の拡張機能でこれらのMarkdownを統一体裁のPDFへ出力できるよう設定済みです（手順は [PDF化ガイド](guideline/pdf-export.md) を参照）。
+| 区分 | 置き場所 | 使い方 |
+|------|----------|--------|
+| テンプレート | [`templates/`](templates/) | プロジェクトへ **コピーして埋める** ひな形。その工程で書くものは番号付き、工程を問わず使うもの（ADR・GitHub）は番号なしのフォルダです。 |
+| ガイドライン | [`guidelines/`](guidelines/) | **読んで従う / 確認に使う** 規約・チェックリスト・解説。テーマ別に分けています。 |
+| チートシート | [`cheatsheets/`](cheatsheets/) | 作業中に **引いて使う** 早見表（目安の数値・計算式・コマンド・記法）。 |
+
+テンプレートは必ずプロジェクトの実態に合わせてカスタマイズしてください。
+Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（→ [PDF化ガイド](guidelines/documentation/pdf_export.md)）。
 
 ---
 
-## テンプレート一覧
+## どの場面で何を使うか
 
-### 要件定義・設計
+| 場面 | 使うもの |
+|------|----------|
+| どの文書を書けばよいか迷った | [設計文書の使い分けガイド](guidelines/documentation/document_types_guide.md) |
+| 新規プロジェクトを立ち上げる | [プロジェクト README](templates/00_project/project_readme.md) / [GitHub テンプレート](templates/github/README.md) |
+| 顧客・関係者と要望を整理する | [要求定義書](templates/01_requirements/requirement_analysis.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
+| 要件を確定させる・見積もる | [要件定義書](templates/01_requirements/requirements_definition.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
+| 規模・性能・コストを概算する | [見積もり用 概算値チートシート](cheatsheets/capacity_estimation.md) |
+| 実装に着手する（技術・環境・運用方針の確認） | [開発開始チェックリスト](guidelines/development/development_start_checklist.md) |
+| 設計する | [基本設計書](templates/02_design/basic_design.md) → [詳細設計書](templates/02_design/detailed_design.md) |
+| 実装済み機能の仕様を残す | [内部仕様書（Backend / Frontend / Android）](templates/03_spec/) |
+| 技術・設計上の重要な判断をする（工程を問わず） | [ADR](templates/adr/adr.md)（[書き方](guidelines/documentation/adr_guideline.md)）→ 採択後に [アーキテクチャ文書](templates/04_architecture/architecture.md) へ反映 |
+| 既存システムに機能追加・改修する | [変更管理テンプレート一式](templates/05_change/README.md) |
+| ログ・監視を設計する | [ログ設計ガイドライン](guidelines/observability/logging_convention.md) / [監視基盤ツールリスト](guidelines/observability/monitoring_tools.md) |
+| 負荷試験をする | [負荷試験計画](templates/06_test/stress_test_plan.md) → [試験記録](templates/06_test/test_record.md) |
+| 本番公開する | [公開前チェックリスト](guidelines/security/public_release_checklist.md) / [Nginx セキュリティ対策](guidelines/security/nginx_security.md) |
+| 運用を始める | [運用手順書](templates/07_operation/operation.md) |
 
-| ファイル | 用途 |
+---
+
+## テンプレート一覧（`templates/`）
+
+| 工程 | ファイル | 内容 |
+|------|----------|------|
+| 00 プロジェクト | [`project_readme.md`](templates/00_project/project_readme.md) | プロジェクトルート用 README |
+| | [`team_topologies.md`](templates/00_project/team_topologies.md) | チームトポロジー（組織設計）※未作成 |
+| 01 要求・要件 | [`requirement_analysis.md`](templates/01_requirements/requirement_analysis.md) | 要求定義書（なぜ作るか・誰の課題か・成功の定義） |
+| | [`requirements_definition.md`](templates/01_requirements/requirements_definition.md) | 要件定義書（機能要件・非機能要件） |
+| 02 設計 | [`basic_design.md`](templates/02_design/basic_design.md) | 基本設計書（何を作るか・外からどう見えるか） |
+| | [`detailed_design.md`](templates/02_design/detailed_design.md) | 詳細設計書（どう実装するか） |
+| 03 仕様 | [`internal_spec_backend.md`](templates/03_spec/internal_spec_backend.md) | バックエンド内部仕様書 |
+| | [`internal_spec_frontend.md`](templates/03_spec/internal_spec_frontend.md) | フロントエンド内部仕様書 |
+| | [`internal_spec_android.md`](templates/03_spec/internal_spec_android.md) | Android アプリ内部仕様書 |
+| 04 アーキテクチャ | [`architecture.md`](templates/04_architecture/architecture.md) | アーキテクチャ文書（現時点の全体像・設計原則） |
+| 05 変更管理 | [`README.md`](templates/05_change/README.md) | 規模別の使い分け |
+| | [`01_change_request.md`](templates/05_change/01_change_request.md) | 変更要求書 |
+| | [`02_change_requirements.md`](templates/05_change/02_change_requirements.md) | 変更要件定義書 |
+| | [`03_impact_analysis.md`](templates/05_change/03_impact_analysis.md) | 影響調査書 |
+| | [`04_change_specification.md`](templates/05_change/04_change_specification.md) | 変更仕様書（小〜中規模を1ファイルで） |
+| 06 テスト | [`stress_test_plan.md`](templates/06_test/stress_test_plan.md) | 負荷試験 計画／実施 |
+| | [`test_record.md`](templates/06_test/test_record.md) | 試験記録（1回分） |
+| 07 運用 | [`operation.md`](templates/07_operation/operation.md) | 運用手順書（日常運用・監視・インシデント対応） |
+| 工程横断 | [`adr/adr.md`](templates/adr/adr.md) | ADR（アーキテクチャ決定記録）1件分。判断のたびに作成し、採択後は書き換えない |
+| | [`github/`](templates/github/README.md) | `.github/` 用 Issue / PR / リリーステンプレート、ラベル作成スクリプト |
+
+## ガイドライン一覧（`guidelines/`）
+
+| テーマ | ファイル | 内容 |
+|--------|----------|------|
+| ドキュメント運用 | [`document_types_guide.md`](guidelines/documentation/document_types_guide.md) | 要件定義・設計・仕様書・差分資料・ADR の役割と更新ルール |
+| | [`adr_guideline.md`](guidelines/documentation/adr_guideline.md) | ADR の位置付けと運用 |
+| | [`pdf_export.md`](guidelines/documentation/pdf_export.md) | VS Code 拡張機能による PDF 化手順 |
+| 開発 | [`development_start_checklist.md`](guidelines/development/development_start_checklist.md) | 開発開始チェックリスト（スコープ・技術選定・設計・環境・CI/CD・リスク） |
+| 要件 | [`requirements_checklist.md`](guidelines/requirements/requirements_checklist.md) | 要件確認チェックリスト（共通機能・非機能・見積対象・ヒアリング観点） |
+| 可観測性 | [`logging_convention.md`](guidelines/observability/logging_convention.md) | ログ設計ガイドライン（OpenTelemetry / ECS） |
+| | [`monitoring_tools.md`](guidelines/observability/monitoring_tools.md) | 監視基盤ツールリスト（OpenTelemetry + Grafana） |
+| セキュリティ | [`public_release_checklist.md`](guidelines/security/public_release_checklist.md) | Web サービス公開前チェックリスト |
+| | [`nginx_security.md`](guidelines/security/nginx_security.md) | Nginx で導入できるセキュリティ対策 |
+
+## チートシート一覧（`cheatsheets/`）
+
+| ファイル | 内容 |
 |----------|------|
-| [`design/basic/Requirements_Definition_Document_TEMPLATE.md`](design/basic/Requirements_Definition_Document_TEMPLATE.md) | 要件定義書テンプレート |
-| [`design/basic/Basic_Design_Document_TEMPLATE.md`](design/basic/Basic_Design_Document_TEMPLATE.md) | 基本設計書テンプレート |
-| [`design/basic/Detailed_Design_Document_TEMPLATE.md`](design/basic/Detailed_Design_Document_TEMPLATE.md) | 詳細設計書テンプレート |
-| [`design/basic/design_documents_guide.md`](design/basic/design_documents_guide.md) | 要件定義・基本設計・詳細設計・仕様書の使い分けガイド |
-| [`design/basic/requirements_checklist.md`](design/basic/requirements_checklist.md) | 要件確認チェックリスト（共通機能・非機能要件・見積もるべき要件・ヒアリング観点） |
+| [`capacity_estimation.md`](cheatsheets/capacity_estimation.md) | 見積もり用 概算値（データサイズ・RPS・CPU・レイテンシ・DB・帯域の目安と計算例） |
+| [`programming_languages.html`](cheatsheets/programming_languages.html) | Go / Python / TypeScript / PHP の構文対照表（ブラウザで開いて使う） |
 
-### 内部仕様書
-
-| ファイル | 用途 |
-|----------|------|
-| [`spec/TEMPLATE_INTERNAL_SPECIFICATION_BACKEND.md`](spec/TEMPLATE_INTERNAL_SPECIFICATION_BACKEND.md) | バックエンド（サーバー側）内部仕様書 |
-| [`spec/TEMPLATE_INTERNAL_SPECIFICATION_FRONTEND.md`](spec/TEMPLATE_INTERNAL_SPECIFICATION_FRONTEND.md) | フロントエンド内部仕様書（UI/UX・状態管理など） |
-| [`spec/TEMPLATE_INTERNAL_SPECIFICATION_ANDROID_APP.md`](spec/TEMPLATE_INTERNAL_SPECIFICATION_ANDROID_APP.md) | Android アプリ内部仕様書 |
-
-### 運用・アーキテクチャ・組織
-
-| ファイル | 用途 |
-|----------|------|
-| [`operation/TEMPLATE_OPERATION.md`](operation/TEMPLATE_OPERATION.md) | 運用手順テンプレート（日常運用・監視・インシデント対応） |
-| [`TEMPLATE_ROOT_README.md`](TEMPLATE_ROOT_README.md) | プロジェクトルート用 README テンプレート（ルート直下） |
-| [`architecture/Architecture.md`](architecture/Architecture.md) | アーキテクチャドキュメント（技術スタック・構成原則） |
-| [`architecture/adr_guideline.md`](architecture/adr_guideline.md) | ADR（アーキテクチャ決定記録）作成ガイドライン |
-| [`guideline/logging-convention.md`](guideline/logging-convention.md) | ログ設計ガイドライン（OpenTelemetry / ECS） |
-| [`observability/tools.md`](observability/tools.md) | 監視基盤ツールリスト（OpenTelemetry + Grafana） |
-| [`organization/Team_Topologies.md`](organization/Team_Topologies.md) | チームトポロジー（組織設計）テンプレート |
+チートシートは Markdown を基本とし、表が横に広いなど HTML の方が見やすいものは HTML のまま置いてよい（HTML は PDF 化の対象外）。
 
 ---
 
@@ -44,87 +88,47 @@ VS Code の拡張機能でこれらのMarkdownを統一体裁のPDFへ出力で�
 
 ```text
 .
-├── README.md                                     # 本ファイル（インデックス）
-├── TEMPLATE_ROOT_README.md                       # プロジェクトルート用README（分類が曖昧なためルート直下）
-├── design/                                       # 要件定義・設計書テンプレート
-│   └── basic/
-│       ├── Requirements_Definition_Document_TEMPLATE.md
-│       ├── Basic_Design_Document_TEMPLATE.md
-│       ├── Detailed_Design_Document_TEMPLATE.md
-│       ├── design_documents_guide.md             # 各設計文書の使い分けガイド
-│       └── requirements_checklist.md             # 要件確認チェックリスト（非機能・見積観点）
-├── spec/                                         # 内部仕様書テンプレート・各種仕様の格納先
-│   ├── TEMPLATE_INTERNAL_SPECIFICATION_BACKEND.md
-│   ├── TEMPLATE_INTERNAL_SPECIFICATION_FRONTEND.md
-│   └── TEMPLATE_INTERNAL_SPECIFICATION_ANDROID_APP.md
-├── operation/                                    # 運用ドキュメント
-│   └── TEMPLATE_OPERATION.md                      # 運用手順
-├── architecture/                                 # アーキテクチャ関連
-│   ├── Architecture.md
-│   ├── adr_guideline.md
-│   └── adr/                                       # 個別ADRの格納先
-├── guideline/                                     # 各種ガイドライン
-│   ├── logging-convention.md
-│   └── pdf-export.md                              # VS Code拡張機能でのPDF化手順
-├── observability/tools.md                         # 監視ツールリスト
-├── organization/Team_Topologies.md                # 組織設計
-├── css/                                           # PDF出力用スタイル
-│   ├── cover-style.css
-│   └── page-style.css
-├── images/                                        # ドキュメント貼付画像の保存先
-├── output/                                        # PDF出力先
-├── sow/                                           # SOW（作業範囲記述書）格納先
-└── .vscode/                                       # PDF出力・Lint等の設定
-    ├── extensions.json
-    └── settings.json
+├── README.md                  # 本ファイル（索引）
+├── templates/                 # コピーして使うテンプレート（工程順）
+│   ├── 00_project/
+│   ├── 01_requirements/
+│   ├── 02_design/
+│   ├── 03_spec/
+│   ├── 04_architecture/
+│   ├── 05_change/
+│   ├── 06_test/
+│   ├── 07_operation/
+│   ├── adr/                   # 工程横断：判断のたびに書く
+│   └── github/                # 工程横断：.github/ と同じ構成
+├── guidelines/                # 読んで従うガイドライン（テーマ別）
+│   ├── documentation/
+│   ├── development/
+│   ├── requirements/
+│   ├── observability/
+│   └── security/
+├── cheatsheets/               # 作業中に引く早見表
+├── css/                       # PDF 出力用スタイル
+├── images/                    # 文書に貼り付けた画像の保存先（自動）
+├── output/                    # PDF 出力先（Git 管理外）
+└── .vscode/                   # PDF 出力・Lint 等の設定
 ```
 
 ---
 
-## PDF化（VS Code 拡張機能）
+## ドキュメント運用の流れ
 
-各Markdownは VS Code 拡張機能 **Markdown PDF**（`yzane.markdown-pdf`）で、表紙・スタイル・Mermaid図込みのPDFへ出力できます。設定は [`.vscode/`](.vscode/) に同梱済みです。
+1. **要求・要件を固める** — 要求定義書 → 要件定義書。抜け漏れは要件確認チェックリストで確認する。
+2. **設計する** — 基本設計書 → 詳細設計書。実装後は内部仕様書を「現在の正」として最新化する。
+3. **設計判断を記録する** — アーキテクチャに影響する判断は ADR を作成し、合意後に `Accepted` へ更新。採択内容を アーキテクチャ文書 に反映する。
+4. **変更する** — 既存システムの改修は `templates/05_change/` を規模に応じて使い、完了後に大本の設計書・仕様書へ反映する。
+5. **公開・運用する** — 公開前チェックリストを通し、運用手順書と Runbook を整備する。
 
-- 手順・設定の詳細 → **[VS Code 拡張機能によるPDF化ガイド](guideline/pdf-export.md)**
-- ざっくり手順:
-  1. 本リポジトリを VS Code でフォルダとして開き、推奨拡張機能をインストールする。
-  2. 対象の `.md` を開き、コマンドパレットで `Markdown PDF: Export (pdf)` を実行する。
-  3. `output/` にPDFが生成される。
+詳しい考え方は [設計文書の使い分けガイド](guidelines/documentation/document_types_guide.md) を参照してください。
 
----
+## このリポジトリへの追加ルール
 
-## 運用フロー
-
-1. **要件変更・新規機能の検討**
-   - 要件定義書／各設計書テンプレートをコピーし、機能仕様・UI・運用手順などを更新します。
-
-2. **設計判断の確定**
-   - アーキテクチャに影響する判断がある場合は `architecture/adr/` 配下で ADR を作成（テンプレートは [`architecture/adr_guideline.md`](architecture/adr_guideline.md) を参照）。
-   - ドラフト段階でステークホルダーと合意形成し、確定後にステータスを `Accepted` に更新します。
-
-3. **全体アーキテクチャの更新**
-   - ADRで採択した内容を [`architecture/Architecture.md`](architecture/Architecture.md) に反映し、現行構成との差分を明記します。
-   - 反映時には変更日・担当者を明記し、必要に応じて関連セクションの図や表を更新します。
-
-4. **運用ドキュメントの整備**
-   - 日常運用や監視体制に変更がある場合は [`operation/TEMPLATE_OPERATION.md`](operation/TEMPLATE_OPERATION.md) をベースにした運用ドキュメントを更新し、関連Runbookへのリンクを整備します。
-
----
-
-## ドキュメント初回チェックリスト
-
-- [ ] テンプレートの書式をプロジェクト仕様に合わせて更新したか
-- [ ] `architecture/Architecture.md` の最新化とバージョン記載を行ったか
-- [ ] 必要なADRを作成／更新したか（`architecture/adr/ADR-XXX-title.md`）
-- [ ] 運用手順ドキュメント（`operation/TEMPLATE_OPERATION.md` を基に作成）を用意したか
-- [ ] 関連テンプレート（監視、組織など）を用意したか
-- [ ] PDF出力が正しく行えるか（[PDF化ガイド](guideline/pdf-export.md) 参照）を確認したか
-- [ ] 更新内容をチームに共有し、コードと同様にレビューを受けたか
-
----
-
-## ファイル整理ポリシー
-
-- 体裁が大きく変わった場合や過去版を参照する必要がある場合は、旧版を別ディレクトリ（例: `archive/`）に保管してください。
-- ドキュメントはGitでバージョン管理されるため、著者と変更履歴を明記しておくとレビューがスムーズになります。
-- 大型ドキュメントはテンプレート末尾の指示に従い分割し、目次や索引を更新してください。
+- **コピーして埋めるもの** は `templates/` の該当工程へ、**読んで従うもの** は `guidelines/` の該当テーマへ、**作業中に引く早見表** は `cheatsheets/` へ置く。
+  - 迷ったら「チームとして守るルールか？」で判断する。ルールなら `guidelines/`、参考値・書き方の早見なら `cheatsheets/`。
+- `cheatsheets/` は当面フラットに置き、10本程度に増えたらテーマ別のサブフォルダ（例: `estimation/`, `tools/`）に分ける。
+- ファイル名は英小文字の `snake_case.md`。テンプレートには `_template` などの接尾辞を付けない（コピー後そのまま使える名前にする）。
+- 追加・移動したら本 README の一覧と「どの場面で何を使うか」を更新する。

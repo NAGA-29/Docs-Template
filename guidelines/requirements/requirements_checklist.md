@@ -5,7 +5,7 @@
 | 文書名     | 要件確認チェックリスト                       |
 | バージョン | v1.0                                         |
 | 位置づけ   | 要件定義・見積時の「聞き漏れ防止」ガイド     |
-| 関連文書   | [要件定義書テンプレート](Requirements_Definition_Document_TEMPLATE.md) / [要求定義書テンプレート](Requirement_Analysis_Document_TAMPLATE.md) / [設計文書の使い分けガイド](design_documents_guide.md) |
+| 関連文書   | [開発開始チェックリスト](../development/development_start_checklist.md) / [要件定義書テンプレート](../../templates/01_requirements/requirements_definition.md) / [要求定義書テンプレート](../../templates/01_requirements/requirement_analysis.md) / [設計文書の使い分けガイド](../documentation/document_types_guide.md) |
 
 > クライアント案件（受託）か自社開発かを問わず、要件定義・設計の初期に**確認すべき項目**と、**見積に必ず含めるべき項目**を整理したチェックリストである。  
 > すべてを確定させる必要はない。重要なのは「**確認した結果、決まった / 決まっていない / 対象外**」を明示的に残すこと。
@@ -80,7 +80,7 @@
 - [ ] 瑕疵担保 / 契約不適合責任の期間・範囲、無償保守期間
 - [ ] 知的財産権（成果物・ソース・OSS利用）の帰属
 - [ ] 再委託の可否、秘密保持・情報取扱いの条件
-- [ ] 要件変更時のルール（変更要求の受付・見積・承認フロー）→ [`design/change/`](../change/README.md) を参照
+- [ ] 要件変更時のルール（変更要求の受付・見積・承認フロー）→ [`templates/05_change/`](../../templates/05_change/README.md) を参照
 
 ### 1.4 制約・前提
 
@@ -179,6 +179,8 @@
 
 ### 3.2 性能・拡張性
 
+> RPS・CPU・データ量・帯域の概算は [見積もり用 概算値チートシート](../../cheatsheets/capacity_estimation.md) を参照。
+
 | 確認項目 | 確認内容・質問例 | よくある値・選択肢 |
 | -------- | ---------------- | ------------------ |
 | ユーザー数 | 登録ユーザー数 / 同時アクセス数 / ピーク時間帯 | 登録1万・同時100 など |
@@ -197,8 +199,8 @@
 | -------- | ---------------- | ------------------ |
 | 運用体制 | 誰が運用するか（自社 / クライアント / 保守ベンダー / SRE） | 体制未定は最大のリスク |
 | 運用時間 | 監視・問合せ対応の時間 | 24h / 平日日中のみ / オンコール |
-| 監視 | 監視対象（死活 / リソース / エラー率 / 業務指標）、通知先、通知条件 | [観測性ツール](../../observability/tools.md) 参照 |
-| ログ | ログ種別、保存期間、保存先、マスキング | [ログ設計規約](../../guideline/logging/logging-convention.md) 参照 |
+| 監視 | 監視対象（死活 / リソース / エラー率 / 業務指標）、通知先、通知条件 | [観測性ツール](../observability/monitoring_tools.md) 参照 |
+| ログ | ログ種別、保存期間、保存先、マスキング | [ログ設計規約](../observability/logging_convention.md) 参照 |
 | バックアップ | 対象・頻度・世代数・保管場所・復元手順の訓練 | 日次・30世代 |
 | リリース方式 | 手動 / CI/CD、リリース頻度、ダウンタイム、ロールバック手順 | |
 | 環境構成 | 開発 / 検証 / ステージング / 本番の環境数 | 環境数は費用に直結 |
@@ -206,7 +208,7 @@
 | 保守契約 | 問合せ窓口、SLA（一次回答時間・復旧目標）、対応時間、対応範囲 | 保守に含む作業 / 含まない作業を明記 |
 | 障害対応 | 障害時の連絡フロー、エスカレーション、報告書の要否 | |
 | 定期メンテナンス | OS/ミドルウェア/ライブラリの更新、証明書更新、ドメイン更新、棚卸し | **実施者と費用の所在を明確化** |
-| ドキュメント | 運用手順書・Runbook・構成図の納品要否 | [運用テンプレート](../../operation/TEMPLATE_OPERATION.md) 参照 |
+| ドキュメント | 運用手順書・Runbook・構成図の納品要否 | [運用テンプレート](../../templates/07_operation/operation.md) 参照 |
 | サポート期間 | OS・言語・FWのEOL（サポート終了）を踏まえた保守期間 | EOLを超える利用期間なら更新計画が必要 |
 
 ### 3.4 移行性
@@ -236,7 +238,7 @@
 | インシデント対応 | 情報漏えい時の連絡体制、通知義務、フォレンジックの要否 |
 | サプライチェーン | OSSライセンス、SBOM、外部委託先・外部SaaSの審査 |
 
-- 公開前のWebサービスは [Webサービス公開前ガイドライン](../../guideline/security/public_release_checklist.md) も確認する。
+- 公開前のWebサービスは [Webサービス公開前ガイドライン](../security/public_release_checklist.md) も確認する。
 - 脆弱性診断・ペネトレーションテストは**費用が大きく、指摘対応の工数も別途必要**なため、見積から漏れないようにする。
 
 ### 3.6 システム環境・エコロジー
@@ -309,7 +311,7 @@
 | CI/CD・開発環境 | パイプライン構築、自動テスト基盤、リリース手順、ブランチ戦略 | 初期構築のみでなく運用・改善も必要 |
 | 外部連携 | 連携先との仕様調整、接続テスト、認証設定、エラー・再送処理、連携先テスト環境の調整 | **連携先の遅延は開発側のコントロール外**。待ち時間の扱いを前提に |
 | データ移行 | 移行設計、移行ツール開発、データクレンジング、リハーサル、本番移行、突合 | 現行データの品質調査、移行リハーサルを複数回見込む |
-| テスト | 単体 / 結合 / 総合 / 受入支援、性能テスト、セキュリティテスト、回帰テスト、不具合修正、テスト仕様書・結果報告 | 不具合修正・再テストの工数、**テストデータ作成**。→ [テスト記録](../../guideline/test/test_record.md) / [負荷試験計画](../../guideline/test/stress_test_plan_template.md) |
+| テスト | 単体 / 結合 / 総合 / 受入支援、性能テスト、セキュリティテスト、回帰テスト、不具合修正、テスト仕様書・結果報告 | 不具合修正・再テストの工数、**テストデータ作成**。→ [テスト記録](../../templates/06_test/test_record.md) / [負荷試験計画](../../templates/06_test/stress_test_plan.md) |
 | セキュリティ | 脆弱性診断（外部委託費）、指摘対応、セキュリティチェックシート回答 | 診断費用と是正工数が別枠で必要 |
 | 実機・端末検証 | OS / ブラウザ / 端末のマトリクス検証、実機調達・レンタル | 対応環境の範囲に比例 |
 | ドキュメント | 設計書、API仕様書、運用手順書、操作マニュアル、README、リリースノート | 納品物として約束した範囲すべて |
@@ -454,18 +456,18 @@
 
 | 確認事項 | 反映先 |
 | -------- | ------ |
-| 目的・課題・成功指標・利用者 | [要求定義書](Requirement_Analysis_Document_TAMPLATE.md) / [要件定義書 1章](Requirements_Definition_Document_TEMPLATE.md) |
+| 目的・課題・成功指標・利用者 | [要求定義書](../../templates/01_requirements/requirement_analysis.md) / [要件定義書 1章](../../templates/01_requirements/requirements_definition.md) |
 | 業務フロー・現行業務 | 要件定義書 2章 |
-| 機能要件（共通機能含む） | 要件定義書 3章 → [基本設計書](Basic_Design_Document_TEMPLATE.md) |
-| 非機能要件 | 要件定義書 4章 → 基本設計書 / [Architecture.md](../../architecture/Architecture.md) |
-| 技術選定・構成の判断理由 | [ADR](../../architecture/adr_guideline.md) |
+| 機能要件（共通機能含む） | 要件定義書 3章 → [基本設計書](../../templates/02_design/basic_design.md) |
+| 非機能要件 | 要件定義書 4章 → 基本設計書 / [Architecture.md](../../templates/04_architecture/architecture.md) |
+| 技術選定・構成の判断理由 | [ADR](../documentation/adr_guideline.md) |
 | スコープ・受入条件 | 要件定義書 7章 |
 | 見積前提・対象外 | SOW（`sow/`）・見積書 |
 | リスク・未決事項 | 要件定義書 8章・9章 |
-| 運用・監視・保守 | [運用テンプレート](../../operation/TEMPLATE_OPERATION.md) / [観測性ツール](../../observability/tools.md) |
-| セキュリティ | [公開前チェックリスト](../../guideline/security/public_release_checklist.md) |
-| テスト方針・性能試験 | [テスト記録](../../guideline/test/test_record.md) / [負荷試験計画](../../guideline/test/stress_test_plan_template.md) |
-| 要件変更 | [変更管理](../change/README.md) |
+| 運用・監視・保守 | [運用テンプレート](../../templates/07_operation/operation.md) / [観測性ツール](../observability/monitoring_tools.md) |
+| セキュリティ | [公開前チェックリスト](../security/public_release_checklist.md) |
+| テスト方針・性能試験 | [テスト記録](../../templates/06_test/test_record.md) / [負荷試験計画](../../templates/06_test/stress_test_plan.md) |
+| 要件変更 | [変更管理](../../templates/05_change/README.md) |
 
 ---
 

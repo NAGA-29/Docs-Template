@@ -1,0 +1,6 @@
+# OS
+.DS_Store
+
+# PDF出力物（output/ ディレクトリ自体は残す）
+output/*
+!output/.gitkeep
