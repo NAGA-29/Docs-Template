@@ -532,7 +532,7 @@ flowchart TD
 - [ ] セキュリティ要件の記入完了
 - [ ] 運用セクションに 運用手順書（[テンプレート](../07_operation/operation.md)） ベースのRunbook参照とバックエンド固有事項を記載
 - [ ] 改善計画の記入完了
-- [ ] 影響のあるADRを `docs/adr/` に作成または更新済み（[ADRテンプレート](../04_architecture/adr.md)）
+- [ ] 影響のあるADRを `docs/adr/` に作成または更新済み（[ADRテンプレート](../adr/adr.md)）
 - [ ] アーキテクチャドキュメント（[テンプレート](../04_architecture/architecture.md)）の更新が必要か確認し反映済み
 
 ## 📤 ファイル分割ガイド

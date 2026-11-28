@@ -4,7 +4,7 @@
 
 | 区分 | 置き場所 | 使い方 |
 |------|----------|--------|
-| テンプレート | [`templates/`](templates/) | プロジェクトへ **コピーして埋める** ひな形。工程順に番号を振っています。 |
+| テンプレート | [`templates/`](templates/) | プロジェクトへ **コピーして埋める** ひな形。その工程で書くものは番号付き、工程を問わず使うもの（ADR・GitHub）は番号なしのフォルダです。 |
 | ガイドライン | [`guidelines/`](guidelines/) | **読んで従う / 確認に使う** 規約・チェックリスト・解説。テーマ別に分けています。 |
 | チートシート | [`cheatsheets/`](cheatsheets/) | 作業中に **引いて使う** 早見表（目安の数値・計算式・コマンド・記法）。 |
 
@@ -25,7 +25,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | 実装に着手する（技術・環境・運用方針の確認） | [開発開始チェックリスト](guidelines/development/development_start_checklist.md) |
 | 設計する | [基本設計書](templates/02_design/basic_design.md) → [詳細設計書](templates/02_design/detailed_design.md) |
 | 実装済み機能の仕様を残す | [内部仕様書（Backend / Frontend / Android）](templates/03_spec/) |
-| 技術選定・アーキテクチャを決める | [ADR](templates/04_architecture/adr.md)（[書き方](guidelines/documentation/adr_guideline.md)）→ [アーキテクチャ文書](templates/04_architecture/architecture.md) に反映 |
+| 技術・設計上の重要な判断をする（工程を問わず） | [ADR](templates/adr/adr.md)（[書き方](guidelines/documentation/adr_guideline.md)）→ 採択後に [アーキテクチャ文書](templates/04_architecture/architecture.md) へ反映 |
 | 既存システムに機能追加・改修する | [変更管理テンプレート一式](templates/05_change/README.md) |
 | ログ・監視を設計する | [ログ設計ガイドライン](guidelines/observability/logging_convention.md) / [監視基盤ツールリスト](guidelines/observability/monitoring_tools.md) |
 | 負荷試験をする | [負荷試験計画](templates/06_test/stress_test_plan.md) → [試験記録](templates/06_test/test_record.md) |
@@ -48,7 +48,6 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | | [`internal_spec_frontend.md`](templates/03_spec/internal_spec_frontend.md) | フロントエンド内部仕様書 |
 | | [`internal_spec_android.md`](templates/03_spec/internal_spec_android.md) | Android アプリ内部仕様書 |
 | 04 アーキテクチャ | [`architecture.md`](templates/04_architecture/architecture.md) | アーキテクチャ文書（現時点の全体像・設計原則） |
-| | [`adr.md`](templates/04_architecture/adr.md) | ADR（アーキテクチャ決定記録）1件分 |
 | 05 変更管理 | [`README.md`](templates/05_change/README.md) | 規模別の使い分け |
 | | [`01_change_request.md`](templates/05_change/01_change_request.md) | 変更要求書 |
 | | [`02_change_requirements.md`](templates/05_change/02_change_requirements.md) | 変更要件定義書 |
@@ -57,7 +56,8 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | 06 テスト | [`stress_test_plan.md`](templates/06_test/stress_test_plan.md) | 負荷試験 計画／実施 |
 | | [`test_record.md`](templates/06_test/test_record.md) | 試験記録（1回分） |
 | 07 運用 | [`operation.md`](templates/07_operation/operation.md) | 運用手順書（日常運用・監視・インシデント対応） |
-| GitHub | [`github/`](templates/github/README.md) | `.github/` 用 Issue / PR / リリーステンプレート、ラベル作成スクリプト |
+| 工程横断 | [`adr/adr.md`](templates/adr/adr.md) | ADR（アーキテクチャ決定記録）1件分。判断のたびに作成し、採択後は書き換えない |
+| | [`github/`](templates/github/README.md) | `.github/` 用 Issue / PR / リリーステンプレート、ラベル作成スクリプト |
 
 ## ガイドライン一覧（`guidelines/`）
 
@@ -98,7 +98,8 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 │   ├── 05_change/
 │   ├── 06_test/
 │   ├── 07_operation/
-│   └── github/                # .github/ と同じ構成
+│   ├── adr/                   # 工程横断：判断のたびに書く
+│   └── github/                # 工程横断：.github/ と同じ構成
 ├── guidelines/                # 読んで従うガイドライン（テーマ別）
 │   ├── documentation/
 │   ├── development/
