@@ -150,6 +150,8 @@ Worker / Batch / 外部サービス
 
 ### 3.3 負荷量の算出根拠
 
+> 概算の計算式・ピーク係数の目安は [見積もり用 概算値チートシート](../../cheatsheets/capacity_estimation.md) を参照。
+
 ```text
 例:
 端末数 30,000台

@@ -6,6 +6,7 @@
 |------|----------|--------|
 | テンプレート | [`templates/`](templates/) | プロジェクトへ **コピーして埋める** ひな形。工程順に番号を振っています。 |
 | ガイドライン | [`guidelines/`](guidelines/) | **読んで従う / 確認に使う** 規約・チェックリスト・解説。テーマ別に分けています。 |
+| チートシート | [`cheatsheets/`](cheatsheets/) | 作業中に **引いて使う** 早見表（目安の数値・計算式・コマンド・記法）。 |
 
 テンプレートは必ずプロジェクトの実態に合わせてカスタマイズしてください。
 Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（→ [PDF化ガイド](guidelines/documentation/pdf_export.md)）。
@@ -20,6 +21,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | 新規プロジェクトを立ち上げる | [プロジェクト README](templates/00_project/project_readme.md) / [GitHub テンプレート](templates/github/README.md) |
 | 顧客・関係者と要望を整理する | [要求定義書](templates/01_requirements/requirement_analysis.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
 | 要件を確定させる・見積もる | [要件定義書](templates/01_requirements/requirements_definition.md) + [要件確認チェックリスト](guidelines/requirements/requirements_checklist.md) |
+| 規模・性能・コストを概算する | [見積もり用 概算値チートシート](cheatsheets/capacity_estimation.md) |
 | 設計する | [基本設計書](templates/02_design/basic_design.md) → [詳細設計書](templates/02_design/detailed_design.md) |
 | 実装済み機能の仕様を残す | [内部仕様書（Backend / Frontend / Android）](templates/03_spec/) |
 | 技術選定・アーキテクチャを決める | [ADR](templates/04_architecture/adr.md)（[書き方](guidelines/documentation/adr_guideline.md)）→ [アーキテクチャ文書](templates/04_architecture/architecture.md) に反映 |
@@ -69,6 +71,15 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 | セキュリティ | [`public_release_checklist.md`](guidelines/security/public_release_checklist.md) | Web サービス公開前チェックリスト |
 | | [`nginx_security.md`](guidelines/security/nginx_security.md) | Nginx で導入できるセキュリティ対策 |
 
+## チートシート一覧（`cheatsheets/`）
+
+| ファイル | 内容 |
+|----------|------|
+| [`capacity_estimation.md`](cheatsheets/capacity_estimation.md) | 見積もり用 概算値（データサイズ・RPS・CPU・レイテンシ・DB・帯域の目安と計算例） |
+| [`programming_languages.html`](cheatsheets/programming_languages.html) | Go / Python / TypeScript / PHP の構文対照表（ブラウザで開いて使う） |
+
+チートシートは Markdown を基本とし、表が横に広いなど HTML の方が見やすいものは HTML のまま置いてよい（HTML は PDF 化の対象外）。
+
 ---
 
 ## ディレクトリ構成
@@ -91,6 +102,7 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 │   ├── requirements/
 │   ├── observability/
 │   └── security/
+├── cheatsheets/               # 作業中に引く早見表
 ├── css/                       # PDF 出力用スタイル
 ├── images/                    # 文書に貼り付けた画像の保存先（自動）
 ├── output/                    # PDF 出力先（Git 管理外）
@@ -111,6 +123,8 @@ Markdown は VS Code 拡張機能で統一体裁の PDF に出力できます（
 
 ## このリポジトリへの追加ルール
 
-- **コピーして埋めるもの** は `templates/` の該当工程へ、**読んで従うもの** は `guidelines/` の該当テーマへ置く。
+- **コピーして埋めるもの** は `templates/` の該当工程へ、**読んで従うもの** は `guidelines/` の該当テーマへ、**作業中に引く早見表** は `cheatsheets/` へ置く。
+  - 迷ったら「チームとして守るルールか？」で判断する。ルールなら `guidelines/`、参考値・書き方の早見なら `cheatsheets/`。
+- `cheatsheets/` は当面フラットに置き、10本程度に増えたらテーマ別のサブフォルダ（例: `estimation/`, `tools/`）に分ける。
 - ファイル名は英小文字の `snake_case.md`。テンプレートには `_template` などの接尾辞を付けない（コピー後そのまま使える名前にする）。
 - 追加・移動したら本 README の一覧と「どの場面で何を使うか」を更新する。

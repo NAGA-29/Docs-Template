@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go / Python / TypeScript / PHP Cheat Sheet</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --panel: #121a2b;
+    --panel-2: #0f1726;
+    --text: #e8edf7;
+    --muted: #97a3b6;
+    --line: #26324a;
+    --accent: #8fb7ff;
+    --code: #dbe7ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.45;
+  }
+  .wrap {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 28px;
+  }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+  }
+  .sub {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+  }
+  section {
+    margin: 26px 0 34px;
+  }
+  h2 {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+  }
+  th, td {
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    padding: 12px;
+    vertical-align: top;
+    text-align: left;
+  }
+  th:last-child, td:last-child { border-right: 0; }
+  tr:last-child td { border-bottom: 0; }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--panel-2);
+    color: var(--accent);
+    font-size: 13px;
+    z-index: 1;
+  }
+  th:first-child, td:first-child {
+    width: 160px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  code, pre {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  }
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--code);
+    font-size: 13px;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .footer {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 30px;
+  }
+  @media (max-width: 700px) {
+    .wrap { padding: 18px; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Go / Python / TypeScript / PHP Cheat Sheet</h1>
+  <div class="sub">同じ概念を横並び。説明は最小限。</div>
+
+  <div class="toc">
+    <a href="#variables">変数</a>
+    <a href="#collections">配列・リスト</a>
+    <a href="#slice-semantics">Sliceの共有</a>
+    <a href="#maps">Map / Dict</a>
+    <a href="#loops">ループ</a>
+    <a href="#conditions">条件分岐</a>
+    <a href="#functions">関数</a>
+    <a href="#pointers">Pointer</a>
+    <a href="#classes">構造体・型</a>
+    <a href="#errors">エラー処理</a>
+    <a href="#null">null系</a>
+    <a href="#async">非同期</a>
+    <a href="#json">JSON</a>
+    <a href="#files">ファイル</a>
+  </div>
+
+  <section id="variables">
+    <h2>変数・定数</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>変数</td>
+          <td><pre>x := 10
+var x int = 10</pre></td>
+          <td><pre>x = 10</pre></td>
+          <td><pre>let x = 10</pre></td>
+          <td><pre>$x = 10;</pre></td>
+        </tr>
+        <tr>
+          <td>定数</td>
+          <td><pre>const Max = 10</pre></td>
+          <td><pre>MAX = 10</pre></td>
+          <td><pre>const MAX = 10</pre></td>
+          <td><pre>const MAX = 10;</pre></td>
+        </tr>
+        <tr>
+          <td>文字列展開</td>
+          <td><pre>fmt.Sprintf("%s: %d", name, age)</pre></td>
+          <td><pre>f"{name}: {age}"</pre></td>
+          <td><pre>`${name}: ${age}`</pre></td>
+          <td><pre>"{$name}: {$age}"</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="collections">
+    <h2>配列・リスト・Slice</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>可変長</td>
+          <td><pre>[]int{1, 2, 3}</pre><div class="note">slice</div></td>
+          <td><pre>[1, 2, 3]</pre></td>
+          <td><pre>const xs: number[] = [1, 2, 3]</pre></td>
+          <td><pre>$xs = [1, 2, 3];</pre></td>
+        </tr>
+        <tr>
+          <td>固定長</td>
+          <td><pre>[3]int{1, 2, 3}</pre><div class="note">array</div></td>
+          <td><pre># 標準listは可変長</pre></td>
+          <td><pre>const xs: [number, number, number]
+  = [1, 2, 3]</pre></td>
+          <td><pre>// arrayは可変長</pre></td>
+        </tr>
+        <tr>
+          <td>長さ</td>
+          <td><pre>len(xs)</pre></td>
+          <td><pre>len(xs)</pre></td>
+          <td><pre>xs.length</pre></td>
+          <td><pre>count($xs)</pre></td>
+        </tr>
+        <tr>
+          <td>追加</td>
+          <td><pre>xs = append(xs, 4)</pre></td>
+          <td><pre>xs.append(4)</pre></td>
+          <td><pre>xs.push(4)</pre></td>
+          <td><pre>$xs[] = 4;</pre></td>
+        </tr>
+        <tr>
+          <td>切り出し</td>
+          <td><pre>xs[1:3]</pre></td>
+          <td><pre>xs[1:3]</pre></td>
+          <td><pre>xs.slice(1, 3)</pre></td>
+          <td><pre>array_slice($xs, 1, 2)</pre></td>
+        </tr>
+        <tr>
+          <td>コピー</td>
+          <td><pre>ys := slices.Clone(xs)</pre></td>
+          <td><pre>ys = xs.copy()</pre></td>
+          <td><pre>const ys = [...xs]</pre></td>
+          <td><pre>$ys = $xs;</pre><div class="note">Copy-on-Write</div></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+
+  <section id="slice-semantics">
+    <h2>Slice / 部分配列の意味</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>部分取得</td>
+          <td><pre>b := a[1:3]</pre><div class="note">元の backing array を共有</div></td>
+          <td><pre>b = a[1:3]</pre><div class="note">新しい list を作る（shallow copy）</div></td>
+          <td><pre>const b = a.slice(1, 3)</pre><div class="note">新しい Array を作る（shallow copy）</div></td>
+          <td><pre>$b = array_slice($a, 1, 2);</pre><div class="note">新しい配列として扱える</div></td>
+        </tr>
+        <tr>
+          <td>要素を書換</td>
+          <td><pre>b[0] = 999
+// a側も変わる</pre></td>
+          <td><pre>b[0] = 999
+# a側は変わらない</pre></td>
+          <td><pre>b[0] = 999
+// a側は変わらない</pre></td>
+          <td><pre>$b[0] = 999;
+// $a側は変わらない</pre></td>
+        </tr>
+        <tr>
+          <td>内部オブジェクト</td>
+          <td><pre>// slice自体が共有</pre></td>
+          <td><pre>a = [[1], [2]]
+b = a[:]
+b[0][0] = 999
+# a[0][0] も変わる</pre></td>
+          <td><pre>const a = [{n:1}]
+const b = a.slice()
+b[0].n = 999
+// a[0].n も変わる</pre></td>
+          <td><pre>$a = [(object)["n" =&gt; 1]];
+$b = $a;
+$b[0]-&gt;n = 999;
+// 同じ object は共有</pre></td>
+        </tr>
+        <tr>
+          <td>完全分離</td>
+          <td><pre>b := slices.Clone(a[1:3])</pre></td>
+          <td><pre>b = copy.deepcopy(a[1:3])</pre></td>
+          <td><pre>const b = structuredClone(
+  a.slice(1, 3)
+)</pre></td>
+          <td><pre>// objectを含む場合は
+// clone / 再帰コピーを検討</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="maps">
+    <h2>Map / Dict / 連想配列</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>作成</td>
+          <td><pre>m := map[string]int{
+  "a": 1,
+}</pre></td>
+          <td><pre>m = {"a": 1}</pre></td>
+          <td><pre>const m: Record&lt;string, number&gt; = {
+  a: 1
+}</pre></td>
+          <td><pre>$m = ["a" =&gt; 1];</pre></td>
+        </tr>
+        <tr>
+          <td>取得</td>
+          <td><pre>v := m["a"]</pre></td>
+          <td><pre>v = m["a"]</pre></td>
+          <td><pre>const v = m["a"]</pre></td>
+          <td><pre>$v = $m["a"];</pre></td>
+        </tr>
+        <tr>
+          <td>存在確認</td>
+          <td><pre>v, ok := m["a"]</pre></td>
+          <td><pre>"a" in m</pre></td>
+          <td><pre>"a" in m</pre></td>
+          <td><pre>array_key_exists("a", $m)</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="loops">
+    <h2>ループ</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>要素</td>
+          <td><pre>for _, v := range xs {
+  fmt.Println(v)
+}</pre></td>
+          <td><pre>for v in xs:
+    print(v)</pre></td>
+          <td><pre>for (const v of xs) {
+  console.log(v)
+}</pre></td>
+          <td><pre>foreach ($xs as $v) {
+  echo $v;
+}</pre></td>
+        </tr>
+        <tr>
+          <td>index付き</td>
+          <td><pre>for i, v := range xs {}</pre></td>
+          <td><pre>for i, v in enumerate(xs):
+    pass</pre></td>
+          <td><pre>xs.forEach((v, i) =&gt; {})</pre></td>
+          <td><pre>foreach ($xs as $i =&gt; $v) {}</pre></td>
+        </tr>
+        <tr>
+          <td>回数</td>
+          <td><pre>for i := 0; i &lt; 10; i++ {}</pre></td>
+          <td><pre>for i in range(10):
+    pass</pre></td>
+          <td><pre>for (let i = 0; i &lt; 10; i++) {}</pre></td>
+          <td><pre>for ($i = 0; $i &lt; 10; $i++) {}</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="conditions">
+    <h2>条件分岐</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>if</td>
+          <td><pre>if x &gt; 0 {
+} else {
+}</pre></td>
+          <td><pre>if x &gt; 0:
+    pass
+else:
+    pass</pre></td>
+          <td><pre>if (x &gt; 0) {
+} else {
+}</pre></td>
+          <td><pre>if ($x &gt; 0) {
+} else {
+}</pre></td>
+        </tr>
+        <tr>
+          <td>switch系</td>
+          <td><pre>switch x {
+case 1:
+default:
+}</pre></td>
+          <td><pre>match x:
+    case 1:
+        pass
+    case _:
+        pass</pre></td>
+          <td><pre>switch (x) {
+  case 1:
+    break
+  default:
+}</pre></td>
+          <td><pre>match ($x) {
+  1 =&gt; "one",
+  default =&gt; "other",
+};</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="functions">
+    <h2>関数</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>定義</td>
+          <td><pre>func add(a, b int) int {
+  return a + b
+}</pre></td>
+          <td><pre>def add(a: int, b: int) -&gt; int:
+    return a + b</pre></td>
+          <td><pre>function add(a: number, b: number): number {
+  return a + b
+}</pre></td>
+          <td><pre>function add(int $a, int $b): int {
+  return $a + $b;
+}</pre></td>
+        </tr>
+        <tr>
+          <td>無名関数</td>
+          <td><pre>f := func(x int) int {
+  return x * 2
+}</pre></td>
+          <td><pre>f = lambda x: x * 2</pre></td>
+          <td><pre>const f = (x: number) =&gt; x * 2</pre></td>
+          <td><pre>$f = fn(int $x) =&gt; $x * 2;</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+
+  <section id="pointers">
+    <h2>Go Pointer</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>アドレス取得</td>
+          <td><pre>x := 10
+p := &amp;x</pre><div class="note">&amp;x = xを指すポインタを取得</div></td>
+          <td><pre>-</pre><div class="note">通常は直接扱わない</div></td>
+          <td><pre>-</pre><div class="note">通常は直接扱わない</div></td>
+          <td><pre>-</pre><div class="note">通常は直接扱わない</div></td>
+        </tr>
+        <tr>
+          <td>ポインタ型</td>
+          <td><pre>var p *int
+var u *User</pre><div class="note">*T = T型の値を指すポインタ型</div></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+        <tr>
+          <td>値を読む</td>
+          <td><pre>fmt.Println(*p)</pre><div class="note">*p = pが指している先の値</div></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+        <tr>
+          <td>値を書換</td>
+          <td><pre>*p = 20</pre><div class="note">pが指す元の値を書き換える</div></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td><pre>func update(u *User) {
+  u.Name = "NAGA"
+}
+
+user := User{Name: "A"}
+update(&amp;user)</pre></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+        <tr>
+          <td>レシーバ</td>
+          <td><pre>func (u User) Name() string {
+  return u.Name
+}
+
+func (u *User) Rename(name string) {
+  u.Name = name
+}</pre><div class="note">(u User) = 値レシーバ / (u *User) = ポインタレシーバ</div></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+        <tr>
+          <td>覚え方</td>
+          <td><pre>&amp;x   → xを指すポインタを取得
+*T   → Tを指すポインタ型
+*p   → pの指す先の値</pre></td>
+          <td><pre>-</pre></td><td><pre>-</pre></td><td><pre>-</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="classes">
+    <h2>構造体 / オブジェクト型 / クラス</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>データ構造</td>
+          <td><pre>type User struct {
+  Name string
+  Age  int
+}</pre></td>
+          <td><pre>@dataclass
+class User:
+    name: str
+    age: int</pre></td>
+          <td><pre>type User = {
+  name: string
+  age: number
+}</pre><div class="note">オブジェクトの形を表す型</div></td>
+          <td><pre>class User {
+  public function __construct(
+    public string $name,
+    public int $age
+  ) {}
+}</pre></td>
+        </tr>
+        <tr>
+          <td>生成</td>
+          <td><pre>u := User{
+  Name: "NAGA",
+  Age: 36,
+}</pre></td>
+          <td><pre>u = User("NAGA", 36)</pre></td>
+          <td><pre>const u: User = {
+  name: "NAGA",
+  age: 36
+}</pre><div class="note">classを使わず型 + objectで実体化</div></td>
+          <td><pre>$u = new User("NAGA", 36);</pre></td>
+        </tr>
+        <tr>
+          <td>メソッド</td>
+          <td><pre>func (u User) Hello() string {
+  return u.Name
+}</pre></td>
+          <td><pre>def hello(self) -&gt; str:
+    return self.name</pre></td>
+          <td><pre>type User = {
+  name: string
+  hello(): string
+}
+
+const u: User = {
+  name: "NAGA",
+  hello() {
+    return this.name
+  }
+}</pre></td>
+          <td><pre>public function hello(): string {
+  return $this-&gt;name;
+}</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="errors">
+    <h2>エラー処理</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>基本</td>
+          <td><pre>v, err := do()
+if err != nil {
+  return err
+}</pre></td>
+          <td><pre>try:
+    v = do()
+except Exception as e:
+    ...</pre></td>
+          <td><pre>try {
+  const v = do()
+} catch (e) {
+}</pre></td>
+          <td><pre>try {
+  $v = do();
+} catch (Throwable $e) {
+}</pre></td>
+        </tr>
+        <tr>
+          <td>作成</td>
+          <td><pre>errors.New("failed")
+fmt.Errorf("failed: %w", err)</pre></td>
+          <td><pre>raise ValueError("failed")</pre></td>
+          <td><pre>throw new Error("failed")</pre></td>
+          <td><pre>throw new RuntimeException("failed");</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="null">
+    <h2>null / nil / None / undefined</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>空値</td>
+          <td><pre>nil</pre></td>
+          <td><pre>None</pre></td>
+          <td><pre>null
+undefined</pre></td>
+          <td><pre>null</pre></td>
+        </tr>
+        <tr>
+          <td>確認</td>
+          <td><pre>if x == nil {}</pre></td>
+          <td><pre>if x is None:
+    pass</pre></td>
+          <td><pre>if (x == null) {}</pre></td>
+          <td><pre>if ($x === null) {}</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="async">
+    <h2>非同期・並行処理</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>非同期実行</td>
+          <td><pre>go task()</pre></td>
+          <td><pre>await task()</pre></td>
+          <td><pre>await task()</pre></td>
+          <td><pre>// 標準の基本形は同期</pre></td>
+        </tr>
+        <tr>
+          <td>待機</td>
+          <td><pre>var wg sync.WaitGroup
+wg.Add(1)
+go func() {
+  defer wg.Done()
+}()
+wg.Wait()</pre></td>
+          <td><pre>await asyncio.gather(
+    task1(),
+    task2(),
+)</pre></td>
+          <td><pre>await Promise.all([
+  task1(),
+  task2(),
+])</pre></td>
+          <td><pre>// Laravelなら Queue / Job が定番</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="json">
+    <h2>JSON</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>encode</td>
+          <td><pre>b, err := json.Marshal(v)</pre></td>
+          <td><pre>s = json.dumps(v)</pre></td>
+          <td><pre>const s = JSON.stringify(v)</pre></td>
+          <td><pre>$s = json_encode($v);</pre></td>
+        </tr>
+        <tr>
+          <td>decode</td>
+          <td><pre>err := json.Unmarshal(b, &amp;v)</pre></td>
+          <td><pre>v = json.loads(s)</pre></td>
+          <td><pre>const v = JSON.parse(s)</pre></td>
+          <td><pre>$v = json_decode($s, true);</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="files">
+    <h2>ファイル</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>概念</th><th>Go</th><th>Python</th><th>TypeScript / Node.js</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>全読み込み</td>
+          <td><pre>b, err := os.ReadFile("a.txt")</pre></td>
+          <td><pre>text = Path("a.txt").read_text()</pre></td>
+          <td><pre>const text = await fs.readFile(
+  "a.txt",
+  "utf8"
+)</pre></td>
+          <td><pre>$text = file_get_contents("a.txt");</pre></td>
+        </tr>
+        <tr>
+          <td>書き込み</td>
+          <td><pre>os.WriteFile(
+  "a.txt",
+  data,
+  0644,
+)</pre></td>
+          <td><pre>Path("a.txt").write_text(text)</pre></td>
+          <td><pre>await fs.writeFile(
+  "a.txt",
+  text
+)</pre></td>
+          <td><pre>file_put_contents(
+  "a.txt",
+  $text
+);</pre></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <div class="footer">
+    Go: slice と array は別物。[]T = slice / [N]T = array
+  </div>
+</div>
+</body>
+</html>
